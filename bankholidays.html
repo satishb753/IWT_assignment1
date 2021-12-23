@@ -23,16 +23,26 @@
   
 	<div class="container jumbotron">
     <div class="row">
-      <div class="fiter col-md-3" id="filter">
-        <h2>Select a division</h2>
+      <div class="fiter col-md-4" id="filter">
+        <h2>Pick a division</h2>
         <select id="division" name="division" class="selectpicker">
 
         </select>
-        <br>
-        <br>
-        <br>
+        <br><br>
 
-        <h3>Apply date filter</h3>
+        <h2>Filter by:</h2>
+        <select id="period" name="period" class="selectpicker">
+          <option selected value="">Select</option>
+          <option value="yesterday">Yesterday</option>
+          <option value="lastweek">Last week</option>
+          <option value="lastmonth">Last month</option>
+        </select>
+        <br>
+        <br>
+        <b>OR</b>
+        <br>
+        <br>
+        <h3>Filter by date-range</h3>
         <label for="from">Start Date</label>
         <br>
         <input type="date" id="from" name="from"/>
@@ -43,10 +53,10 @@
         <br><br>
         <button type="button" id="filterBtn"
         class="btn btn-primary">
-          Filter Bank Holidays
+          Filter Holidays
         </button>
       </div>
-      <div class="output col-md-9">
+      <div class="output col-md-8">
         <h1>Bank Holiday List</h1>
       <ul id="list"></ul>
       </div>

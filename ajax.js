@@ -1,4 +1,3 @@
-
 window.onload = function apiRequestFetch() {
 
     let filterBtn = document.getElementById("filterBtn");
@@ -8,7 +7,7 @@ window.onload = function apiRequestFetch() {
     let startDate = new Date("2000-01-01");
     let endDate = new Date("2100-01-01");
 
-    // Instantiate an new XHR Object
+    // Instantiate a new XHR Object
     const xhr = new XMLHttpRequest();
 
     // Open an obejct (GET/POST, PATH,
@@ -35,7 +34,6 @@ window.onload = function apiRequestFetch() {
             }
             $select.on('change',function(){
                 holidayEvents = obj[this.value]["events"];
-                // console.log(holidayEvents);
                 populateDivision(holidayEvents);
             })
 
@@ -85,9 +83,36 @@ window.onload = function apiRequestFetch() {
             return (date >= startDate && date <= endDate);
         });
     
-    
         populateDivision(filteredHolidays);
     }
+
+    var $period = $("#period");
+    $period.on('change',function(){
+        let today = new Date();
+        let initialDate = new Date();
+        daterange = this.value;
+        console.log("Today is "+today)
+
+        switch(daterange) {
+            case 'yesterday':
+              initialDate.setDate(today.getDate()-1);
+              break;
+            case 'lastweek':
+              initialDate.setDate(today.getDate()-7);
+              break;
+            case 'lastmonth': 
+              initialDate.setDate(today.getDate()-30);
+        }
+
+        initialDate.toISOString().split('T')[0]
+        today.toISOString().split('T')[0]
+
+        var filteredHolidays = holidayEvents.filter(a => {
+            var date = new Date(a.date);
+            return (date >= initialDate && date <= today);
+        });
+        populateDivision(filteredHolidays);
+    });
 }
 
 
