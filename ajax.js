@@ -1,12 +1,12 @@
-let filterBtn = document.getElementById("filterBtn");
-filterBtn.addEventListener("click", filterHolidays);
-
-let obj = '';
-let startDate = new Date("2000-01-01");
-let endDate = new Date("2100-01-01");
-
 
 window.onload = function apiRequestFetch() {
+
+    let filterBtn = document.getElementById("filterBtn");
+    filterBtn.addEventListener("click", filterHolidays);
+
+    let obj, holidayEvents = '';
+    let startDate = new Date("2000-01-01");
+    let endDate = new Date("2100-01-01");
 
     // Instantiate an new XHR Object
     const xhr = new XMLHttpRequest();
@@ -31,7 +31,6 @@ window.onload = function apiRequestFetch() {
 
             var $select = $("#division");
             for (var idx in divisions) {
-                // console.log(divisions[idx]);
                 $select.append('<option value=' + divisions[idx] + '>' + divisions[idx] + '</option>');
             }
             $select.on('change',function(){
@@ -49,43 +48,46 @@ window.onload = function apiRequestFetch() {
 
     // At last send the request
     xhr.send();
-}
 
-function populateDivision(data){
-    str = ""
-    str += `<table>
-    <tr>
-    <th>Title</th>
-    <th>Date</th>
-    </tr>`
-    for (key in holidayEvents) {
-        str += `
+    function populateDivision(data){
+        str = ""
+        str += `<table>
         <tr>
-        <td>${holidayEvents[key]["title"]}<td>
-        <td>${holidayEvents[key]["date"]}</td>
-        <tr>`;
-        // console.log(holidayEvents[key]["date"]);
-
+        <th>Title</th>
+        <th>Date</th>
+        </tr>`
+        for (key in data) {
+            str += `
+            <tr>
+            <td>${data[key]["title"]}<td>
+            <td>${data[key]["date"]}</td>
+            <tr>`;
+            // console.log(holidayEvents[key]["date"]);
+    
+        }
+        list.innerHTML = str;
     }
-    list.innerHTML = str;
+    
+    function filterHolidays(){
+        startDate = document.getElementById("from").value;
+        endDate = document.getElementById("to").value;
+    
+        startDate = new Date(startDate);
+        startDate.toISOString().split('T')[0]
+        endDate = new Date(endDate);
+        endDate.toISOString().split('T')[0]
+    
+        // holidayEvents =  Object.values(data);
+        // console.log("typeof holidayEvents: "+holidayEvents)
+    
+        var filteredHolidays = holidayEvents.filter(a => {
+            var date = new Date(a.date);
+            return (date >= startDate && date <= endDate);
+        });
+    
+    
+        populateDivision(filteredHolidays);
+    }
 }
 
-function filterHolidays(data){
-    startDate = document.getElementById("from").value;
-    endDate = document.getElementById("to").value;
 
-    startDate = new Date(startDate);
-    startDate.toISOString().split('T')[0]
-    endDate = new Date(endDate);
-    endDate.toISOString().split('T')[0]
-
-    holidayEvents = data;
-
-    var filteredHolidays = holidayEvents.filter(a => {
-        var date = new Date(a.date);
-        return (date >= startDate && date <= endDate);
-    });
-
-
-    populateDivision(filteredHolidays);
-}
