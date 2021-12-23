@@ -5,27 +5,27 @@ Open bankholidays.html file in web-browser. Left side of the app shows filters a
 
 Code architecture:
 
-Html file -> bankholidays.html
+Html file -> bankholidays.html <br/>
 Javascript file -> ajax.js
 
 Method:
 Step 1. Fetching data from api and populate our webpage
 
-Step 2. Filtering: Three different types of filtering applied 
-    a) Filter by division
-    b) Filter by yesterday, lastweek and lastmonth
-    c) Filter by date-range
+Step 2. Filtering: Three different types of filtering applied <br/>
+    a) Filter by division <br/>
+    b) Filter by yesterday, lastweek and lastmonth <br/>
+    c) Filter by date-range <br/>
 
 Important functions to look for are:
 
-For fetching data:
-    xhr.open(); xhr.onload(); xhr.send();
+For fetching data:<br/>
+    xhr.open(); xhr.onload(); xhr.send();<br/>
 
-For populating web-page
-    populateDivision();
+For populating web-page<br/>
+    populateDivision();<br/>
 
-For filtering data based on date range
-    filterHolidays();
+For filtering data based on date range<br/>
+    filterHolidays();<br/>
 
 
 Languages used:
