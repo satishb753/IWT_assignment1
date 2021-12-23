@@ -63,6 +63,9 @@ window.onload = function apiRequestFetch() {
             // console.log(holidayEvents[key]["date"]);
     
         }
+        if(Object.keys(data).length<1){
+            str=`<h2>No data matches the selected filter</h2>`
+        }
         list.innerHTML = str;
     }
     
